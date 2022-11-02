@@ -15,15 +15,18 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, 'public')));
+// }
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-app.use(express.static('public'));
+// app.use(express.static('/public/'));
+app.use('/', express.static(path.join(__dirname, 'public')))
 
+
+
+app.listen(PORT, () =>
+  console.log(`Serving static asset routes on port ${PORT}!`)
+);
 
 // Create a new instance of an Apollo server with the GraphQL schema
 // const startApolloServer = async (typeDefs, resolvers) => {
